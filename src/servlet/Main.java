@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.GetMutterListLogic;
 import model.Mutter;
 import model.PostMutterLogic;
 import model.User;
@@ -36,15 +36,10 @@ public class Main extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//つぶやきリスト取得（application）
-		ServletContext application = this.getServletContext();
-		List<Mutter> mutterList = (List<Mutter>) application.getAttribute("mutterList");
-		//なかった場合つぶやきリストを新規作成
-		if(mutterList == null) {
-			mutterList = new ArrayList<>();
-			application.setAttribute("mutterList",mutterList);
-		}
-
+		//つぶやきリスト取得
+		GetMutterListLogic getMutterListLogic = new GetMutterListLogic();
+		List<Mutter> mutterList = getMutterListLogic.execute();
+		request.setAttribute("mutterList", mutterList);
 		//ログイン情報取得
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
@@ -78,14 +73,14 @@ public class Main extends HttpServlet {
 			//つぶやきリストに追加
 			Mutter mutter = new Mutter(loginUser.getName(),text);
 			PostMutterLogic postMutterLogic = new PostMutterLogic();
-			postMutterLogic.execute(mutter, mutterList);
-
-			//application scope つぶやきリスト保存
-			application.setAttribute("mutterList", mutterList);
+			postMutterLogic.execute(mutter);
 		}else {
 			//エラーメッセージを保存
 			request.setAttribute("errorMsg", "つぶやきが入力されていません");
 		}
+		GetMutterListLogic getMutterListLogic = new GetMutterListLogic();
+		List<Mutter> mutterList = getMutterListLogic.execute();
+		request.setAttribute("mutterList", mutterList);
 		//メイン画面にフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
 		dispatcher.forward(request, response);
