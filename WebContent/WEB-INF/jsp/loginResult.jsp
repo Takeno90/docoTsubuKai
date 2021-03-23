@@ -10,9 +10,9 @@
 <body>
 	<h1>どこつぶログイン</h1>
 	<c:choose>
-		<c:when test="${not empty loginUser }">
+		<c:when test="${not empty loginUser}">
 			<p>ログインに成功しました</p>
-			<p>ようこそ<c:out value="${loginUser.name}" />さん</p>
+			<p>ようこそ<c:out value="${loginUser.userId}" />さん</p>
 			<a href="/docoTsubuKai/Main">つぶやき投稿・閲覧へ</a>
 		</c:when>
 		<c:otherwise>

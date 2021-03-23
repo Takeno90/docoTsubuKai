@@ -10,7 +10,7 @@
 <body>
 <h1>どこつぶメイン</h1>
 <p>
-<c:out value="${loginUser.name}"/>さん、ログイン中<br>
+<c:out value="${loginUser.userId}"/>さん、ログイン中<br>
 <a href="/docoTsubuKai/Logout">ログアウト</a>
 </p>
 <p><a href="/docoTsubuKai/Main">更新</a></p>

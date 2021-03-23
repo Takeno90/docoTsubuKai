@@ -1,9 +1,15 @@
 package model;
 
+import dao.AccountDAO;
+
 public class LoginLogic {
 	public boolean execute (User user) {
-		if(user.getPass().equals("1234")) {//ここをDBから取得したpassと比較に変更
-			return true;
+		AccountDAO accountDAO = new AccountDAO();
+		Account account = accountDAO.findByLogin(user);
+		if(account != null) {
+			if(user.getPass().equals(account.getPass())) {
+				return true;
+			}
 		}
 		return false;
 	}

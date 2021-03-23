@@ -8,7 +8,10 @@
 </head>
 <body>
 <h1>どこつぶへようこそ</h1>
-<p><a href="/docoTsubuKai/Login">ログイン</a></p>
-<p><a href="">ユーザー登録</a></p>
+<form action="/docoTsubuKai/Login" method="post">
+	ユーザーID：<input type="text" name="userId"><br>
+	パスワード：<input type="password" name="pass"><br>
+	<input type="submit" value="ログイン">
+</form>
 </body>
 </html>

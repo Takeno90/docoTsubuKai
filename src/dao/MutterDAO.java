@@ -16,6 +16,7 @@ public class MutterDAO {
 	private final String DB_USER = "root";
 	private final String DB_PASS = "";
 
+	//DBから名前、投稿文を取得
 	public List<Mutter> findAll() {
 		List<Mutter> mutterList = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
@@ -37,6 +38,8 @@ public class MutterDAO {
 		}
 		return mutterList;
 	}
+
+	//名前と投稿文をDBに追加
 	public boolean create(Mutter mutter) {
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)){
 			String sql = "INSERT INTO MUTTER(NAME,TEXT) VALUES(?,?)";
