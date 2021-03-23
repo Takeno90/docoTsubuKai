@@ -21,7 +21,7 @@ public class AccountDAO {
 
 		//DB接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER,DB_PASS)){
-			String sql = "SELECT USER_ID,PASS,MAIL,NAME,AGE, FROM ACCOUNT WHERE USER_ID = ? AND PASS = ?";
+			String sql = "SELECT USER_ID,PASS,MAIL,NAME,AGE FROM ACCOUNT WHERE USER_ID = ? AND PASS = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, user.getUserId());
 			pStmt.setString(2, user.getPass());
