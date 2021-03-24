@@ -27,7 +27,6 @@ public class AccountDAO {
 			pStmt.setString(2, user.getPass());
 
 			ResultSet rs = pStmt.executeQuery();
-			System.out.print(rs);
 			if(rs.next()) {
 				String userId = rs.getString("USER_ID");
 				String pass = rs.getString("PASS");
@@ -43,5 +42,27 @@ public class AccountDAO {
 		return account;
 	}
 
-	//ログイン情報を追加
+	//ログイン情報をDBに追加
+	public boolean create(Account account){
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER,DB_PASS)){
+			String sql = "INSERT INTO ACCOUNT (USER_ID,PASS,MAIL,NAME,AGE) VALUES (?,?,?,?,?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setString(1, account.getUserId());
+			pStmt.setString(2, account.getPass());
+			pStmt.setString(3, account.getMail());
+			pStmt.setString(4, account.getName());
+			pStmt.setInt(5, account.getAge());
+
+			//INSERT文を実行
+			int result = pStmt.executeUpdate();
+			if(result != 1) {
+				return false;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

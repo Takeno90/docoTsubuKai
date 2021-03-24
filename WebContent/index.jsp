@@ -9,6 +9,6 @@
 <body>
 <h1>どこつぶへようこそ</h1>
 <p><a href="/docoTsubuKai/Login">ログイン</a></p>
-<p><a href="">ユーザー登録</a></p>
+<p><a href="/docoTsubuKai/Create">ユーザー登録</a></p>
 </body>
 </html>

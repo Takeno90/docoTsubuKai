@@ -13,4 +13,15 @@ public class LoginLogic {
 		}
 		return false;
 	}
+	public boolean create(Account account) {
+		AccountDAO accountDAO = new AccountDAO();
+		boolean isCreate = accountDAO.create(account);
+		if (isCreate == true) {
+			return true;
+		}else {
+			return false;
+		}
+
+
+	}
 }
