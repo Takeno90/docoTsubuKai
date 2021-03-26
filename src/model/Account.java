@@ -31,4 +31,7 @@ public class Account implements Serializable{
 	public int getAge() {
 		return age;
 	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 }

@@ -16,4 +16,7 @@ public class User implements Serializable {
 	public String getPass() {
 		return this.pass;
 	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 }
